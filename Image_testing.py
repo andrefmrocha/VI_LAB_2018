@@ -3,7 +3,20 @@ import cv2
 
 i = 0
 img = cv2.imread('0.png')
+
+#Method to increase a certain color
+# import matplotlib.pyplot as plt
+# plt.subplot(1, 2, 1)
+# plt.imshow(img)
+# plt.subplot(1, 2, 2)
+# img = img.astype(float)
+# img[:, :, 0] += 30
+# img = np.clip(img, 0, 255).astype(np.uint8)
+plt.imshow(img)
+# plt.show()
 kernel = np.ones((7, 7), np.uint8)
+lower_red = np.array([30, 150, 50])
+upper_red = np.array([255, 255, 180])
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.blur(gray, (5, 5))
 ret, thresh = cv2.threshold(gray, 200, 255, 1)
