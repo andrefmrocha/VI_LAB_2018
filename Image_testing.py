@@ -5,7 +5,7 @@ i = 0
 img = cv2.imread('0.png')
 
 #Method to increase a certain color
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 # plt.subplot(1, 2, 1)
 # plt.imshow(img)
 # plt.subplot(1, 2, 2)
@@ -16,13 +16,16 @@ img = cv2.imread('0.png')
 # plt.show()
 
 from sklearn.cluster import KMeans
-kmeans= KMeans(3, 'k-means++')
-print(type(kmeans))
-
 kernel = np.ones((7, 7), np.uint8)
 lower_red = np.array([30, 150, 50])
 upper_red = np.array([255, 255, 180])
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+feat = gray.ravel()
+feat = feat[:, np.newaxis]
+kmeans = KMeans(3, 'k-means++').fit(feat)
+labels = kmeans.labels_.reshape((img.shape[0],img.shape[1]))
+plt.imshow(labels)
+plt.show()
 blur = cv2.blur(gray, (5, 5))
 ret, thresh = cv2.threshold(gray, 200, 255, 1)
 #thresh = 255 - thresh
@@ -54,5 +57,5 @@ approx = cv2.approxPolyDP(contour[index], epsilon, True)
 cv2.drawContours(img, [approx],-1, (255, 255,60), 3)
 # cv2.approxPolyDP()
 cv2.namedWindow('image', cv2.WINDOW_AUTOSIZE)
-cv2.imshow('image', img)
-cv2.waitKey(0)
+# cv2.imshow('image', img)
+# cv2.waitKey(0)
