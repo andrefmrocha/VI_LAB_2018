@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 
 i = 0
-img = cv2.imread('0.png')
+img = cv2.imread('4.jpg')
 
 #Method to increase a certain color
 import matplotlib.pyplot as plt
