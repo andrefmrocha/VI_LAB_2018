@@ -24,8 +24,8 @@ feat = gray.ravel()
 feat = feat[:, np.newaxis]
 kmeans = KMeans(3, 'k-means++').fit(feat)
 labels = kmeans.labels_.reshape((img.shape[0],img.shape[1]))
-plt.imshow(labels)
-plt.show()
+# plt.imshow(labels)
+# plt.show()
 blur = cv2.blur(gray, (5, 5))
 ret, thresh = cv2.threshold(gray, 200, 255, 1)
 #thresh = 255 - thresh
