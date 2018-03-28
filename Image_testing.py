@@ -12,8 +12,13 @@ img = cv2.imread('0.png')
 # img = img.astype(float)
 # img[:, :, 0] += 30
 # img = np.clip(img, 0, 255).astype(np.uint8)
-plt.imshow(img)
+#plt.imshow(img)
 # plt.show()
+
+from sklearn.cluster import KMeans
+kmeans= KMeans(3, 'k-means++')
+print(type(kmeans))
+
 kernel = np.ones((7, 7), np.uint8)
 lower_red = np.array([30, 150, 50])
 upper_red = np.array([255, 255, 180])
