@@ -20,7 +20,13 @@ kernel = np.ones((7, 7), np.uint8)
 lower_red = np.array([30, 150, 50])
 upper_red = np.array([255, 255, 180])
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-feat = gray.ravel()
+frows = np.arange(img[0])[:,np.newaxis].repeat(img[1], axis=1)
+fcolumns = np.arange(img[1])[:,np.newaxis].repeat(img[0], axis=1).T
+def norm(img):
+    img = (img - min(img.ravel()))/(max(img.ravel())-min(img.ravel()))
+    return img
+
+feat = (0.7*norm(img[:,:,0].ravel()), norm(frows.ravel()), norm(fcolumns.ravel()))
 feat = feat[:, np.newaxis]
 kmeans = KMeans(3, 'k-means++').fit(feat)
 labels = kmeans.labels_.reshape((img.shape[0],img.shape[1]))
